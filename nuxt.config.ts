@@ -1,7 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-
+  routeRules: {
+    "/": { redirect: "/auth/login" },
+  },
   runtimeConfig: {
     enviroment: "PRODUCTION",
     public: {
@@ -39,7 +41,7 @@ export default defineNuxtConfig({
       failOnError: true,
       formatter: 'unix',
     }
-  ], "@nuxt/eslint"],
+  ], "@nuxt/eslint", "@nuxt/image"],
 
   css: ['~/assets/css/main.css'],
 
