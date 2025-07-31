@@ -114,11 +114,10 @@
 
 .summary {
   grid-area: summary;
-  background: #ddd;
   padding: 1rem;
 }
 
-.products {
+/* .products {
   grid-area: products;
   display: flex;
   gap: 1rem;
@@ -128,7 +127,7 @@
   background: #ccc;
   padding: 1rem;
   flex: 1;
-}
+} */
 
 .marketplace {
   grid-area: marketplace;

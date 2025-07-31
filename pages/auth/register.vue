@@ -55,6 +55,16 @@ definePageMeta({
               placeholder="********"
             />
           </div>
+          <div>
+            <label class="block mb-1 text-whiteAccent font-medium"
+              >Confirmad Password</label
+            >
+            <input
+              type="password"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
+              placeholder="********"
+            />
+          </div>
           <button
             type="submit"
             class="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition"

@@ -1,8 +1,17 @@
 <script setup lang="ts">
+import Swal from "sweetalert2";
+
 // Jika perlu, tambahkan logika login di sini
 const router = useRouter();
 
-function login() {
+async function login() {
+  await Swal.fire({
+    icon: "success",
+    title: "Login success!",
+    // text: "Silakan login menggunakan akun Anda.",
+    confirmButtonColor: "#3085d6",
+    confirmButtonText: "OK",
+  });
   router.push("/dashboard");
 }
 definePageMeta({
@@ -19,7 +28,7 @@ definePageMeta({
     <div class="flex bg-slate-700 w-full lg:w-1/2 justify-center items-center p-8">
       <div class="w-full max-w-md">
         <h2 class="text-2xl text-whiteAccent font-bold mb-6">Login</h2>
-        <form @submit.prevent="login" class="space-y-4">
+        <form class="space-y-4" @submit.prevent="login">
           <div>
             <label class="block mb-1 text-whiteAccent font-medium">Email</label>
             <input

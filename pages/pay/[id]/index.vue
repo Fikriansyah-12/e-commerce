@@ -1,83 +1,102 @@
-<script setup lang="ts">
-import haloBar from "@/assets/images/image/halo-bar.jpg";
-const summaryItems = [
-  { label: "Subtotal", value: "10.000" },
-  { label: "Tax", value: "0" },
-  { label: "Total", value: "10.000" },
-];
-</script>
-<template>
-  <div class="container">
-    <div class="bg-gray-200 text-left my-3 shadow-lg">
-      <NuxtLink to="/" class="flex items-center">
-        <img src="~/assets/images/image/visor.png" alt="Halos Logo" class="w-20" />
-        <p class="h-full">|</p>
-        <p class="font-medium text-sky-900 ml-2">Checkout</p>
-      </NuxtLink>
-    </div>
-    <div class="checkout-container">
-      <div class="address shadow-lg">
-        <div class="flex items-center gap-2 mb-5">
-          <Iconify icon="arcticons:mapsgo" class="w-5 text-red-900 text-lg" />
-          <label>Alamat Pembeli</label>
-        </div>
-        <div class="gap-2 flex items-center">
-          <p class="font-semibold">Thomas Ardiansyah</p>
-          <p class="font-semibold">(+62)89677639273</p>
-          <p>Jl.terusan suez, kec jauh kel tenggelam, jakarta barat</p>
-        </div>
-      </div>
-      <div class="summary space-y-2 shadow-lg">
-        <div
-          v-for="(item, index) in summaryItems"
-          :key="index"
-          class="flex justify-between border-b-2 border-black pb-1"
-        >
-          <div>{{ item.label }}</div>
-          <div>{{ item.value }}</div>
-        </div>
-        <div class="payment mt-2 space-y-2">
-          <label class="flex items-center space-x-2">
-            <input type="radio" name="payment" value="Credit Card" />
-            <span>Credit Card</span>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input type="radio" name="payment" value="Debit Card" />
-            <span>Debit Card</span>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input type="radio" name="payment" value="Cash" />
-            <span>Cash</span>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input type="radio" name="payment" value="Bank Transfer" />
-            <span>Bank Transfer</span>
-          </label>
-        </div>
+<script setup>
+import { ref } from "vue";
 
-        <button class="bg-blue-800 text-white mt-3 w-full p-2 rounded">
-          Proceed to payment
-        </button>
-      </div>
-      <div class="products">
-        <div class="product-item shadow-lg">
-          <img :src="haloBar" class="w-full" />
-        </div>
-        <div class="product-item shadow-lg">
-          <div class="font-semibold mb-2">Description</div>
-          <p class="mb-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus beatae
-            nam officia eligendi alias placeat maiores repudiandae inventore voluptatum
-            exercitationem, ducimus est aliquid dignissimos nisi, minima recusandae
-            voluptates ut sequi?
-          </p>
-          <div class="font-semibold mb-2">Harga</div>
-          <div class="flex items-center justify-between">
-            <p>Rp.10.000.00</p>
-            <p>Qty:<span>5</span></p>
+const product = ref({
+  id: 1,
+  name: "Apple iMac M3 (2023)",
+  image:
+    "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
+  price: 1499,
+  qty: 1,
+});
+
+const customer = ref({
+  name: "",
+  email: "",
+  address: "",
+});
+</script>
+
+<template>
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold mb-6">Checkout</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Product Summary -->
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
+
+        <div class="flex gap-4">
+          <img
+            :src="product.image"
+            class="w-28 h-28 object-contain rounded bg-gray-100"
+          />
+          <div>
+            <h3 class="font-medium text-lg">{{ product.name }}</h3>
+            <p class="text-gray-600">Qty: {{ product.qty }}</p>
+            <p class="text-blue-600 font-semibold text-lg mt-2">
+              ${{ product.price * product.qty }}
+            </p>
           </div>
         </div>
+
+        <hr class="my-4" />
+
+        <div class="flex justify-between font-medium">
+          <span>Total</span>
+          <span>${{ product.price * product.qty }}</span>
+        </div>
+      </div>
+
+      <!-- Customer Info -->
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-xl font-semibold mb-4">Shipping Details</h2>
+
+        <form @submit.prevent="console.log('Paying...')">
+          <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">Full Name</label>
+            <input
+              v-model="customer.name"
+              type="text"
+              class="w-full border rounded px-3 py-2"
+              required
+            />
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">Email Address</label>
+            <input
+              v-model="customer.email"
+              type="email"
+              class="w-full border rounded px-3 py-2"
+              required
+            />
+          </div>
+
+          <div class="mb-6">
+            <label class="block text-sm font-medium mb-1">Shipping Address</label>
+            <textarea
+              v-model="customer.address"
+              rows="3"
+              class="w-full border rounded px-3 py-2"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full font-medium transition"
+          >
+            Pay ${{ product.price * product.qty }}
+          </button>
+        </form>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+body {
+  background-color: #f9fafb;
+}
+</style>

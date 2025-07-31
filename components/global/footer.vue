@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-gray-100 dark:bg-darkAccent2 text-gray-700 dark:text-gray-300 mt-10">
+  <footer class="bg-gray-100 mt-2 text-gray-700">
     <div class="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
       <!-- Column 1: Logo & Description -->
       <div class="text-black">
@@ -55,9 +55,7 @@
     </div>
 
     <!-- Bottom -->
-    <div
-      class="border-t border-gray-300 text-black font-semibold dark:border-gray-700 mt-8"
-    >
+    <div class="border-t border-gray-300 text-black font-semibold mt-8">
       <div
         class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center text-sm"
       >

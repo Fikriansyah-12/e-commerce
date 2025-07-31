@@ -1,13 +1,60 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+const selectedColor = ref("red");
+
+// Minus harus ada swiper
+const productImages = ref([
+  "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
+  "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-featured-product-shot.jpg",
+  "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
+  "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-featured-product-shot.jpg",
+]);
+
+const selectedImage = ref(productImages.value[0]);
+const products = ref([{ id: 1, name: "Basic Tee 6-Pack", count: 1, stok: 12 }]);
+
+const product = products.value[0];
+
+function increment(product: any) {
+  const p = products.value.find((p: { id: any }) => p.id === product.id);
+  if (p && p.count < p.stok) {
+    p.count++;
+  }
+}
+
+function decrement(product: any) {
+  const p = products.value.find((p: { id: any }) => p.id === product.id);
+  if (p && p.count > 0) {
+    p.count--;
+  }
+}
+
+function navigateToCheckout() {
+  navigateTo(`/pay/${product.id}`);
+}
+</script>
 <template>
   <div class="bg-white container">
     <div class="pt-6 grid grid-cols-2">
-      <!-- Image gallery -->
       <div class="mx-auto">
         <img
-          src="https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-secondary-product-shot.jpg"
-          alt="Two each of gray, white, and black shirts laying flat."
-          class="aspect-square rounded-lg max-lg:hidden"
+          :src="selectedImage"
+          alt="Main product image"
+          class="aspect-video h-auto object-contain bg-gray-200 rounded-lg max-lg:hidden"
         />
+
+        <!-- Gambar thumbnail di bawahnya -->
+        <div class="mt-4 flex gap-3 justify-center">
+          <img
+            v-for="(img, index) in productImages"
+            :key="index"
+            :src="img"
+            class="w-1/2 h-1/2 overflow-x-auto object-cover rounded border cursor-pointer hover:scale-105 transition-transform duration-200"
+            :class="{ 'border-blue-500': selectedImage === img }"
+            @click="selectedImage = img"
+          />
+        </div>
       </div>
 
       <!-- Product info -->
@@ -37,10 +84,28 @@
                 >117 reviews</a
               >
             </div>
+            <div class="gap-2">
+              <p class="py-2">Color</p>
+              <div class="flex gap-1">
+                <label v-for="color in ['black', 'gray', 'yellow']" :key="color">
+                  <input
+                    v-model="selectedColor"
+                    type="radio"
+                    name="productColor"
+                    :value="color"
+                    class="peer hidden"
+                  />
+                  <div
+                    class="w-8 h-8 cursor-pointer rounded-full border-2 peer-checked:ring-1 peer-checked:ring-offset-0 peer-checked:ring-indigo-500"
+                    :style="{ backgroundColor: color }"
+                  ></div>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="py-10 lg:col-span-2 lg:col-start-1 lg:pt-6 lg:pr-8 lg:pb-16">
+        <div class="lg:col-span-2 lg:col-start-1 lg:pt-6 lg:pr-8 lg:pb-16">
           <div>
             <div class="space-y-6">
               <p class="text-base text-gray-900">
@@ -53,7 +118,7 @@
             </div>
           </div>
 
-          <div class="mt-10">
+          <div class="mt-3">
             <h3 class="text-sm font-medium text-gray-900">Highlights</h3>
 
             <div class="mt-4">
@@ -74,7 +139,7 @@
             </div>
           </div>
 
-          <div class="mt-8">
+          <div class="mt-3">
             <h2 class="text-sm font-medium text-gray-900">Details</h2>
 
             <div class="space-y-6">
@@ -84,13 +149,49 @@
                 colors, like our upcoming &quot;Charcoal Gray&quot; limited release.
               </p>
             </div>
-            <div class="mt-10">
+            <div class="flex justify-between items-center mt-3">
+              <!-- Stok di kiri -->
+              <div>
+                <span class="text-lg font-medium">Stok: {{ product.stok }}</span>
+              </div>
+
+              <!-- Counter di kanan -->
+              <div class="flex items-center">
+                <button
+                  class="bg-gray-300 text-black px-2 rounded hover:bg-gray-400"
+                  @click="decrement(product)"
+                >
+                  -
+                </button>
+                <span class="mx-3 text-lg font-medium">{{ product.count }}</span>
+                <button
+                  class="bg-blue-600 text-white px-2 rounded hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                  :disabled="product.count >= product.stok"
+                  @click="increment(product)"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-3 grid cursor-pointer grid-cols-2 gap-2">
               <button
                 type="submit"
-                class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
+                class="p-2 w-full text-center bg-gray-600 text-base font-medium text-white hover:bg-gray-500"
               >
-                Add to bag
+                <span class="inline-block align-middle">
+                  <Iconify icon="mdi:cart-outline" class="w-5 h-5" />
+                </span>
+                <span class="inline-block align-middle ml-2">add to cart</span>
               </button>
+
+              <NuxtLink
+                type="submit"
+                class="p-2 w-full text-center bg-green-600 text-base font-medium text-white hover:bg-green-500"
+                @click="navigateToCheckout"
+              >
+                buy now
+              </NuxtLink>
             </div>
           </div>
         </div>
