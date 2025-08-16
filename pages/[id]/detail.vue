@@ -5,10 +5,9 @@ const selectedColor = ref("red");
 
 // Minus harus ada swiper
 const productImages = ref([
-  "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
-  "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-featured-product-shot.jpg",
-  "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
-  "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-featured-product-shot.jpg",
+  new URL("~/assets/images/image/visor.webp", import.meta.url).href,
+  new URL("~/assets/images/image/helm-face-off.jpg", import.meta.url).href,
+  new URL("~/assets/images/image/retro-helm-green.avif", import.meta.url).href,
 ]);
 
 const selectedImage = ref(productImages.value[0]);
@@ -50,7 +49,7 @@ function navigateToCheckout() {
             v-for="(img, index) in productImages"
             :key="index"
             :src="img"
-            class="w-1/2 h-1/2 overflow-x-auto object-cover rounded border cursor-pointer hover:scale-105 transition-transform duration-200"
+            class="w-1/2 overflow-x-auto object-cover rounded border cursor-pointer hover:scale-105 transition-transform duration-200"
             :class="{ 'border-blue-500': selectedImage === img }"
             @click="selectedImage = img"
           />
@@ -61,13 +60,13 @@ function navigateToCheckout() {
       <div class="mx-auto px-4">
         <div class="lg:col-span-2 lg:pr-8">
           <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-            Basic Tee 6-Pack
+            Helm Retro Gray SVV
           </h1>
         </div>
 
         <!-- Options -->
         <div class="mt-4 lg:row-span-3">
-          <p class="text-3xl tracking-tight text-gray-900">$192</p>
+          <p class="text-3xl tracking-tight text-gray-900"><span>Rp </span>150.000</p>
 
           <!-- Reviews -->
           <div class="mt-6">
@@ -105,15 +104,15 @@ function navigateToCheckout() {
           </div>
         </div>
 
-        <div class="lg:col-span-2 lg:col-start-1 lg:pt-6 lg:pr-8 lg:pb-16">
+        <div class="lg:col-span-2 lg:col-start-1 lg:pt-3 lg:pr-8 lg:pb-16">
           <div>
-            <div class="space-y-6">
-              <p class="text-base text-gray-900">
-                The Basic Tee 6-Pack allows you to fully express your vibrant personality
-                with three grayscale options. Feeling adventurous? Put on a heather gray
-                tee. Want to be a trendsetter? Try our exclusive colorway:
-                &quot;Black&quot;. Need to add an extra pop of color to your outfit? Our
-                white tee has you covered.
+            <div class="text-gray-900">
+              <p>
+                Osbe Silver Visor Google Mask - Black merupakan goggle mask modular
+                berbahan ABS yang didesain trendy &amp; sporty. Dirancang dengan lensa
+                silver, frame lentur anti pecah, serta lapisan busa untuk menyaring debu
+                dan sebagai sirkulasi udara. Dilengkapi protector di mulut dan bagian
+                belakang dilapisi karet anti slip. Cocok digunakan siang hari.
               </p>
             </div>
           </div>
@@ -124,13 +123,15 @@ function navigateToCheckout() {
             <div class="mt-4">
               <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                 <li class="text-gray-400">
-                  <span class="text-gray-600">Hand cut and sewn locally</span>
+                  <span class="text-gray-600"
+                    >Dipotong dan dijahit tangan secara lokal</span
+                  >
                 </li>
                 <li class="text-gray-400">
-                  <span class="text-gray-600">Dyed with our proprietary colors</span>
+                  <span class="text-gray-600">Diwarnai dengan warna milik kami</span>
                 </li>
                 <li class="text-gray-400">
-                  <span class="text-gray-600">Pre-washed &amp; pre-shrunk</span>
+                  <span class="text-gray-600">Pra Cuci &amp; Pra Susut</span>
                 </li>
                 <li class="text-gray-400">
                   <span class="text-gray-600">Ultra-soft 100% cotton</span>
@@ -144,9 +145,8 @@ function navigateToCheckout() {
 
             <div class="space-y-6">
               <p class="text-sm text-gray-600">
-                The 6-Pack includes two black, two white, and two heather gray Basic Tees.
-                Sign up for our subscription service and be the first to get new, exciting
-                colors, like our upcoming &quot;Charcoal Gray&quot; limited release.
+                Osbe Silver Visor Google Mask - Black merupakan goggle mask modular
+                berbahan ABS yang didesain trendy & sporty.
               </p>
             </div>
             <div class="flex justify-between items-center mt-3">

@@ -39,7 +39,7 @@
               class="text-sm font-semibold tracking-wide hover:text-gray-300"
               to="#"
             >
-              ABOUT
+              About
             </NuxtLink>
           </li>
           <li>
@@ -47,7 +47,7 @@
               class="text-sm font-semibold tracking-wide hover:text-gray-300"
               to="#"
             >
-              CONTACT US
+              Features
             </NuxtLink>
           </li>
           <li>
@@ -55,7 +55,7 @@
               class="text-sm font-semibold tracking-wide hover:text-gray-300"
               to="#"
             >
-              PORTFOLIO
+              Pricing
             </NuxtLink>
           </li>
         </ul>

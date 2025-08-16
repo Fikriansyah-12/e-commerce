@@ -1,19 +1,62 @@
 <script setup lang="ts">
 import Swal from "sweetalert2";
+import { useRouter } from "vue-router";
 
-// Jika perlu, tambahkan logika login di sini
 const router = useRouter();
 
+// Dummy data akun
+const dummyUsers = [
+  { email: "user@example.com", password: "Password123!" },
+  { email: "admin@example.com", password: "Admin@123" },
+];
+
+// Form data
+const email = ref("");
+const password = ref("");
+
 async function login() {
+  // Validasi wajib isi
+  if (!email.value.trim() || !password.value.trim()) {
+    await Swal.fire({
+      icon: "warning",
+      title: "Form belum lengkap",
+      text: "Email dan password wajib diisi.",
+      confirmButtonColor: "#f39c12",
+    });
+    return;
+  }
+
+  const foundUser = dummyUsers.find((u) => u.email === email.value);
+
+  if (!foundUser) {
+    await Swal.fire({
+      icon: "error",
+      title: "Email tidak terdaftar",
+      text: "Silakan registrasi terlebih dahulu.",
+      confirmButtonColor: "#d33",
+    });
+    return;
+  }
+
+  if (foundUser.password !== password.value) {
+    await Swal.fire({
+      icon: "error",
+      title: "Password salah",
+      text: "Periksa kembali password Anda.",
+      confirmButtonColor: "#d33",
+    });
+    return;
+  }
+
   await Swal.fire({
     icon: "success",
-    title: "Login success!",
-    // text: "Silakan login menggunakan akun Anda.",
+    title: "Login sukses!",
     confirmButtonColor: "#3085d6",
-    confirmButtonText: "OK",
   });
+
   router.push("/dashboard");
 }
+
 definePageMeta({
   layout: "login",
 });
@@ -32,6 +75,7 @@ definePageMeta({
           <div>
             <label class="block mb-1 text-whiteAccent font-medium">Email</label>
             <input
+              v-model="email"
               type="email"
               class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
               placeholder="you@example.com"
@@ -40,6 +84,7 @@ definePageMeta({
           <div>
             <label class="block mb-1 text-whiteAccent font-medium">Password</label>
             <input
+              v-model="password"
               type="password"
               class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
               placeholder="********"

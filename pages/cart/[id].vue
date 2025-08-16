@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import haloBar from "@/assets/images/image/halo-bar.jpg";
+import haloBar from "@/assets/images/image/reto-helm.png";
 
 const router = useRouter();
 
@@ -109,8 +109,8 @@ function removeProduct(product: any) {
 
           <div class="w-1/3 text-sm">
             <p>
-              PC system All in One APPLE iMac (2023) mqrq3ro/a, Apple M3, 24" Retina 4.5K,
-              8GB, SSD 256GB, 10-core GPU, Keyboard layout INT
+              Osbe Silver Visor Google Mask - Black merupakan goggle mask modular berbahan
+              ABS yang didesain trendy &amp; sporty.
             </p>
 
             <!-- Tombol favorit & remove -->
@@ -149,105 +149,8 @@ function removeProduct(product: any) {
             </button>
           </div>
 
-          <p>$1,499</p>
-        </div>
-      </div>
-      <div class="mt-2 border-b-2">
-        <div class="flex border-b-gray-200 border-b-0 items-center justify-between">
-          <img :src="haloBar" class="w-28" />
-
-          <div class="w-1/3 text-sm">
-            <p>
-              PC system All in One APPLE iMac (2023) mqrq3ro/a, Apple M3, 24" Retina 4.5K,
-              8GB, SSD 256GB, 10-core GPU, Keyboard layout INT
-            </p>
-
-            <!-- Tombol favorit & remove -->
-            <div class="mt-2 flex gap-2">
-              <button
-                class="text-xs gap-2 flex items-center justify-center font-semibold px-3 py-1 text-gray-500 rounded hover:underline hover:text-gray-400"
-                @click="removeProduct(product)"
-              >
-                <Iconify icon="material-symbols-light:favorite-outline" class="w-4 h-4" />
-                Add to favorites
-              </button>
-              <button
-                class="text-xs gap-2 flex items-center justify-center font-semibold px-3 py-1 text-red-600 hover:underline rounded hover:text-red-400"
-                @click="addToFavorite(product)"
-              >
-                <Iconify icon="mdi:remove" class="w-4 h-4" />
-                Remove
-              </button>
-            </div>
-          </div>
-
-          <div class="flex items-center">
-            <button
-              class="bg-gray-300 text-black px-2 rounded hover:bg-gray-400"
-              @click="decrement(product)"
-            >
-              -
-            </button>
-            <span class="mx-3 text-lg font-medium">{{ product.count }}</span>
-            <button
-              class="bg-blue-600 text-white px-2 rounded hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
-              :disabled="product.count >= product.stok"
-              @click="increment(product)"
-            >
-              +
-            </button>
-          </div>
-
-          <p>$1,499</p>
-        </div>
-      </div>
-      <div class="mt-2 border-b-2">
-        <div class="flex border-b-gray-200 border-b-0 items-center justify-between">
-          <img :src="haloBar" class="w-28" />
-
-          <div class="w-1/3 text-sm">
-            <p>
-              PC system All in One APPLE iMac (2023) mqrq3ro/a, Apple M3, 24" Retina 4.5K,
-              8GB, SSD 256GB, 10-core GPU, Keyboard layout INT
-            </p>
-
-            <!-- Tombol favorit & remove -->
-            <div class="mt-2 flex gap-2">
-              <button
-                class="text-xs gap-2 flex items-center justify-center font-semibold px-3 py-1 text-gray-500 rounded hover:underline hover:text-gray-400"
-                @click="removeProduct(product)"
-              >
-                <Iconify icon="material-symbols-light:favorite-outline" class="w-4 h-4" />
-                Add to favorites
-              </button>
-              <button
-                class="text-xs gap-2 flex items-center justify-center font-semibold px-3 py-1 text-red-600 hover:underline rounded hover:text-red-400"
-                @click="addToFavorite(product)"
-              >
-                <Iconify icon="mdi:remove" class="w-4 h-4" />
-                Remove
-              </button>
-            </div>
-          </div>
-
-          <div class="flex items-center">
-            <button
-              class="bg-gray-300 text-black px-2 rounded hover:bg-gray-400"
-              @click="decrement(product)"
-            >
-              -
-            </button>
-            <span class="mx-3 text-lg font-medium">{{ product.count }}</span>
-            <button
-              class="bg-blue-600 text-white px-2 rounded hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
-              :disabled="product.count >= product.stok"
-              @click="increment(product)"
-            >
-              +
-            </button>
-          </div>
-
-          <p>$1,499</p>
+          <span>Rp.</span>
+          <p>150.000</p>
         </div>
       </div>
     </div>

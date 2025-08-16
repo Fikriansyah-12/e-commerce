@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-50">
+  <div class="bg-gray-50 mb-5">
     <section class="container py-3">
       <div class="">
         <Swiper
@@ -86,7 +86,7 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 mt-3 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 mt-3 p-2 sm:grid-cols-2 md:grid-cols-4 gap-6">
           <NuxtLink
             v-for="product in products.filter((p) => p.is_available)"
             :key="product.id"
@@ -97,15 +97,29 @@
             <img
               :src="product.image"
               :alt="product.name"
-              class="w-full h-48 object-cover rounded-t"
+              class="w-full h-48 object-cover bg-inherit rounded-t"
             />
             <div class="p-4">
               <h3 class="text-lg font-semibold">{{ product.name }}</h3>
-              <p class="text-gray-600 mt-3">{{ product.desc }}</p>
+              <p class="text-gray-600 mt-3">
+                {{
+                  isExpanded(product.id)
+                    ? product.desc
+                    : product.desc.slice(0, 100) +
+                      (product.desc.length > 100 ? "..." : "")
+                }}
+              </p>
+              <button
+                v-if="product.desc.length > 100"
+                class="text-blue-500 mt-1 text-sm"
+                @click.stop.prevent="toggleDescription(product.id)"
+              >
+                {{ isExpanded(product.id) ? "Show less" : "Read more" }}
+              </button>
               <div class="flex justify-between">
-                <p class="text-black text-xl font-bold mt-3">
-                  {{ product.price }}
-                </p>
+                <div class="text-black text-xl font-bold mt-3">
+                  <span class="text-sm font-medium">Rp.</span>{{ product.price }}
+                </div>
               </div>
             </div>
           </NuxtLink>
@@ -113,7 +127,7 @@
       </div>
     </section>
     <footer />
-    <ProductViev class="mt-5" />
+    <!-- <ProductViev class="mt-5" /> -->
   </div>
 </template>
 
@@ -129,56 +143,56 @@ import "swiper/css/navigation";
 const products = ref([
   {
     id: 1,
-    name: "Product One",
+    name: "Osbe Silver Visor Google Mask - Black",
     desc:
-      "Matelasse Caviar Skin Double Flap Double Chain Bag Black Gold Hardware IC Type",
-    price: "$29.99",
-    image: new URL("~/assets/images/image/halo-bar.jpg", import.meta.url).href,
+      "Osbe Silver Visor Google Mask - Black merupakan goggle mask modular berbahan ABS yang didesain trendy & sporty. Dirancang dengan lensa silver, frame lentur anti pecah, serta lapisan busa untuk menyaring debu dan sebagai sirkulasi udara. Dilengkapi protector di mulut dan bagian belakang dilapisi karet anti slip. Cocok digunakan siang hari.",
+    price: "200.000",
+    image: new URL("~/assets/images/image/visor.webp", import.meta.url).href,
     stock: 13,
     is_available: true,
     count: 0,
   },
   {
     id: 2,
-    name: "Product Two",
+    name: "RSV Classic Series",
     desc:
-      "Matelasse Caviar Skin Double Flap Double Chain Bag Black Gold Hardware IC Type",
-    price: "$39.99",
-    image: new URL("~/assets/images/image/halo-bar.jpg", import.meta.url).href,
-    is_available: false,
+      "Untuk keamanaan, Classic Series dibekali chinstrap berjenis DD-Ring. Demi kenyamanan konsumen, inner padding atau busa bagian dalam mudah dilepas (Removable padding)",
+    price: "170.000",
+    image: new URL("~/assets/images/image/helm-face-off.jpg", import.meta.url).href,
+    is_available: true,
     stock: 13,
 
     count: 0,
   },
   {
     id: 3,
-    name: "Product Three",
+    name: "Helm Retro White",
     desc:
-      "Matelasse Caviar Skin Double Flap Double Chain Bag Black Gold Hardware IC Type",
-    price: "$19.99",
-    image: new URL("~/assets/images/image/halos-bg.jpg", import.meta.url).href,
+      "Helm retro classic berwarna putih dengan desain minimalis elegan. Dilengkapi dengan kaca bening, tali pengaman kuat, dan busa dalam yang nyaman. Cocok untuk pengendara motor klasik dan harian.",
+    price: "150.000",
+    image: new URL("~/assets/images/image/reto-helm.png", import.meta.url).href,
     stock: 10,
     is_available: true,
     count: 0,
   },
   {
     id: 4,
-    name: "Product Four",
+    name: "Retro Bogo Green",
     desc:
-      "Matelasse Caviar Skin Double Flap Double Chain Bag Black Gold Hardware IC Type",
-    price: "$49.99",
-    image: new URL("~/assets/images/image/halos-bg.jpg", import.meta.url).href,
+      "Helm retro Bogo warna hijau dengan desain klasik dan kaca bening. Menggunakan bahan ABS berkualitas dan dilapisi busa lembut di bagian dalam untuk kenyamanan dan keamanan berkendara.",
+    price: "175.000",
+    image: new URL("~/assets/images/image/retro-helm-green.avif", import.meta.url).href,
     stock: 13,
     is_available: true,
     count: 0,
   },
   {
     id: 5,
-    name: "Product Five",
+    name: "Retro Bogo Silver SVV",
     desc:
-      "Matelasse Caviar Skin Double Flap Double Chain Bag Black Gold Hardware IC Type",
-    price: "$59.99",
-    image: new URL("~/assets/images/image/halos-bg.jpg", import.meta.url).href,
+      "Helm retro Bogo warna silver dengan desain klasik dan kaca bening. Menggunakan bahan ABS berkualitas dan dilapisi busa lembut di bagian dalam untuk kenyamanan dan keamanan berkendara.",
+    price: "178.000",
+    image: new URL("~/assets/images/image/retro-helm-grey.jpeg", import.meta.url).href,
     stock: 13,
     is_available: true,
     count: 0,
@@ -191,7 +205,7 @@ const products = ref([
     price: "$24.99",
     image: new URL("~/assets/images/image/halo-bar.jpg", import.meta.url).href,
     stock: 13,
-    is_available: true,
+    is_available: false,
     count: 0,
   },
   {
@@ -202,10 +216,25 @@ const products = ref([
     price: "$24.99",
     image: new URL("~/assets/images/image/store-banner2.webp", import.meta.url).href,
     stock: 13,
-    is_available: true,
+    is_available: false,
     count: 0,
   },
 ]);
+const expandedDescriptions = ref<number[]>([]);
+
+const isExpanded = (id: number) => {
+  return expandedDescriptions.value.includes(id);
+};
+
+const toggleDescription = (id: number) => {
+  if (isExpanded(id)) {
+    expandedDescriptions.value = expandedDescriptions.value.filter(
+      (itemId) => itemId !== id
+    );
+  } else {
+    expandedDescriptions.value.push(id);
+  }
+};
 </script>
 
 <style scoped>

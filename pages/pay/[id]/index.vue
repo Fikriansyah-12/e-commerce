@@ -3,10 +3,10 @@ import { ref } from "vue";
 
 const product = ref({
   id: 1,
-  name: "Apple iMac M3 (2023)",
-  image:
-    "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
-  price: 1499,
+  name: "Helm Retro White",
+  image: new URL("~/assets/images/image/reto-helm.png", import.meta.url).href,
+
+  price: 150000,
   qty: 1,
 });
 
@@ -35,7 +35,7 @@ const customer = ref({
             <h3 class="font-medium text-lg">{{ product.name }}</h3>
             <p class="text-gray-600">Qty: {{ product.qty }}</p>
             <p class="text-blue-600 font-semibold text-lg mt-2">
-              ${{ product.price * product.qty }}
+              Rp.{{ product.price * product.qty }}
             </p>
           </div>
         </div>
@@ -44,7 +44,7 @@ const customer = ref({
 
         <div class="flex justify-between font-medium">
           <span>Total</span>
-          <span>${{ product.price * product.qty }}</span>
+          <span>Rp{{ product.price * product.qty }}</span>
         </div>
       </div>
 
@@ -87,7 +87,7 @@ const customer = ref({
             type="submit"
             class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full font-medium transition"
           >
-            Pay ${{ product.price * product.qty }}
+            Pay
           </button>
         </form>
       </div>
